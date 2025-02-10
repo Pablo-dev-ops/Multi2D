@@ -16,10 +16,14 @@ public class Conection : MonoBehaviourPunCallbacks
     {
         texto.text = ("Bienvenido");
         botonUnirseASala.gameObject.SetActive(false);
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     void Update()
     { 
-
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            PhotonNetwork.LoadLevel(1);
+        }
     }
     override
     public void OnConnectedToMaster()
